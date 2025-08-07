@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MU-CFT: Coherence Application</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f5f5f5;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #003366;
+      color: white;
+      padding: 2em 1em;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: auto;
+      padding: 2em;
+      background: white;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #003366;
+    }
+    section {
+      margin-bottom: 2em;
+    }
+    label {
+      display: block;
+      margin-top: 1em;
+    }
+    input[type="text"], select {
+      padding: 0.5em;
+      width: 100%;
+      margin-top: 0.5em;
+      box-sizing: border-box;
+    }
+    button {
+      background: #003366;
+      color: white;
+      padding: 0.7em 1.5em;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 1em;
+    }
+    #result {
+      margin-top: 2em;
+      padding: 1em;
+      background: #e9ecef;
+      border-left: 5px solid #003366;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>MU-CFT: Coherence Branch Selector</h1>
+    <p>Select a coherent quantum branch based on subjective dynamics</p>
+  </header>
+  <main>
+    <section>
+      <h2>Input Observer Parameters</h2>
+      <form id="selectorForm">
+        <label for="entropy">Entropy Change (ΔS):</label>
+        <input type="text" id="entropy" name="entropy" placeholder="e.g., 0.25">
+
+        <label for="energy">Internal Energy Coherence (E):</label>
+        <input type="text" id="energy" name="energy" placeholder="e.g., 0.85">
+
+        <label for="probability">Baseline Quantum Probability (P):</label>
+        <input type="text" id="probability" name="probability" placeholder="e.g., 0.7">
+
+        <button type="submit">Compute Coherence</button>
+      </form>
+    </section>
+
+    <section id="result" style="display: none;">
+      <h2>Selected Branch Coherence</h2>
+      <p id="outputText"></p>
+    </section>
+  </main>
+
+  <script>
+    document.getElementById('selectorForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const S = parseFloat(document.getElementById('entropy').value);
+      const E = parseFloat(document.getElementById('energy').value);
+      const P = parseFloat(document.getElementById('probability').value);
+
+      if (isNaN(S) || isNaN(E) || isNaN(P)) {
+        alert('Please enter valid numerical values.');
+        return;
+      }
+
+      const C = P * Math.exp(-S) * E;
+      document.getElementById('outputText').innerText = `C = P · exp(−ΔS) · E = ${C.toFixed(4)}`;
+      document.getElementById('result').style.display = 'block';
+    });
+  </script>
+</body>
+</html>

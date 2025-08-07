@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MU-CFT: Coherence Application</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MU-CFT Coherence Selector</title>
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #f5f5f5;
-      color: #333;
       margin: 0;
       padding: 0;
+      background: #f8f9fa;
+      color: #212529;
+      line-height: 1.6;
     }
     header {
       background: #003366;
@@ -18,90 +19,136 @@
       padding: 2em 1em;
       text-align: center;
     }
+    header h1 {
+      margin-bottom: 0.5em;
+      font-size: 2.2em;
+    }
+    header p {
+      font-size: 1.2em;
+      font-style: italic;
+    }
     main {
-      max-width: 800px;
-      margin: auto;
       padding: 2em;
+      max-width: 960px;
+      margin: auto;
       background: white;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
-    h1, h2 {
+    h2 {
       color: #003366;
-    }
-    section {
-      margin-bottom: 2em;
+      border-bottom: 2px solid #ccc;
+      padding-bottom: 0.3em;
+      margin-top: 2em;
     }
     label {
       display: block;
       margin-top: 1em;
     }
-    input[type="text"], select {
-      padding: 0.5em;
+    input[type="number"], input[type="text"] {
       width: 100%;
-      margin-top: 0.5em;
-      box-sizing: border-box;
+      padding: 0.5em;
+      margin-top: 0.3em;
+      border: 1px solid #ccc;
+      border-radius: 4px;
     }
     button {
-      background: #003366;
-      color: white;
-      padding: 0.7em 1.5em;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
       margin-top: 1em;
+      padding: 0.5em 1em;
+      background: #0066cc;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
     }
-    #result {
+    button:hover {
+      background: #004999;
+    }
+    .result {
       margin-top: 2em;
       padding: 1em;
-      background: #e9ecef;
-      border-left: 5px solid #003366;
+      background: #f1f1f1;
+      border-left: 4px solid #0066cc;
+    }
+    .formula {
+      font-size: 1.3em;
+      text-align: center;
+      margin-top: 1em;
+      font-family: 'Cambria Math', 'Times New Roman', serif;
     }
   </style>
 </head>
 <body>
   <header>
     <h1>MU-CFT: Coherent Quantum Branch Selector</h1>
-    <p>Select a coherent quantum branch based on subjective dynamics</p>
+    <p>Select the most coherent quantum branch using Mandrov's formula</p>
   </header>
   <main>
-    <section>
-      <h2>Input Observer Parameters</h2>
-      <form id="selectorForm">
-        <label for="entropy">Entropy Change (ΔS):</label>
-        <input type="text" id="entropy" name="entropy" placeholder="e.g., 0.25">
+    <div class="formula">
+      C = P &middot; exp(&minus;&Delta;S) &middot; E
+    </div>
 
-        <label for="energy">Internal Energy Coherence (E):</label>
-        <input type="text" id="energy" name="energy" placeholder="e.g., 0.85">
+    <h2>Enter Branch Data</h2>
+    <form id="branchForm">
+      <label>Branch Name:
+        <input type="text" id="name" required />
+      </label>
+      <label>P (probability):
+        <input type="number" step="any" id="p" required />
+      </label>
+      <label>ΔS (entropy increase):
+        <input type="number" step="any" id="ds" required />
+      </label>
+      <label>E (energy coherence):
+        <input type="number" step="any" id="e" required />
+      </label>
+      <button type="submit">Add Branch</button>
+    </form>
 
-        <label for="probability">Baseline Quantum Probability (P):</label>
-        <input type="text" id="probability" name="probability" placeholder="e.g., 0.7">
+    <button onclick="calculateCoherence()">Select Most Coherent Branch</button>
 
-        <button type="submit">Compute Coherence</button>
-      </form>
-    </section>
-
-    <section id="result" style="display: none;">
-      <h2>Selected Branch Coherence</h2>
-      <p id="outputText"></p>
-    </section>
+    <div class="result" id="output"></div>
   </main>
 
   <script>
-    document.getElementById('selectorForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const S = parseFloat(document.getElementById('entropy').value);
-      const E = parseFloat(document.getElementById('energy').value);
-      const P = parseFloat(document.getElementById('probability').value);
+    const branches = [];
 
-      if (isNaN(S) || isNaN(E) || isNaN(P)) {
-        alert('Please enter valid numerical values.');
+    document.getElementById('branchForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const p = parseFloat(document.getElementById('p').value);
+      const ds = parseFloat(document.getElementById('ds').value);
+      const eVal = parseFloat(document.getElementById('e').value);
+
+      if (name && !isNaN(p) && !isNaN(ds) && !isNaN(eVal)) {
+        const c = p * Math.exp(-ds) * eVal;
+        branches.push({ name, p, ds, e: eVal, c });
+        document.getElementById('branchForm').reset();
+        alert(`Branch "${name}" added.`);
+      }
+    });
+
+    function calculateCoherence() {
+      if (branches.length === 0) {
+        document.getElementById('output').innerText = 'No branches added.';
         return;
       }
 
-      const C = P * Math.exp(-S) * E;
-      document.getElementById('outputText').innerText = `C = P · exp(−ΔS) · E = ${C.toFixed(4)}`;
-      document.getElementById('result').style.display = 'block';
-    });
+      let best = branches[0];
+      for (let i = 1; i < branches.length; i++) {
+        if (branches[i].c > best.c) {
+          best = branches[i];
+        }
+      }
+
+      let result = `<strong>Most Coherent Branch:</strong><br>Name: ${best.name}<br>C = ${best.c.toFixed(5)}<br>P = ${best.p}, ΔS = ${best.ds}, E = ${best.e}`;
+
+      result += '<hr><strong>All Branches:</strong><br>';
+      for (const b of branches) {
+        result += `Name: ${b.name}, C = ${b.c.toFixed(5)}<br>`;
+      }
+
+      document.getElementById('output').innerHTML = result;
+    }
   </script>
 </body>
 </html>

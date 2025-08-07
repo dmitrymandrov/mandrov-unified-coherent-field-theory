@@ -1,153 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MU-CFT Coherence Selector</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MU-CFT: Coherent Quantum Branch Selector</title>
   <style>
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f8f9fa;
-      color: #212529;
-      line-height: 1.6;
-    }
-    header {
-      background: #003366;
-      color: white;
-      padding: 2em 1em;
-      text-align: center;
-    }
-    header h1 {
-      margin-bottom: 0.5em;
-      font-size: 2.2em;
-    }
-    header p {
-      font-size: 1.2em;
-      font-style: italic;
-    }
-    main {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
       padding: 2em;
-      max-width: 960px;
-      margin: auto;
-      background: white;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      color: #333;
     }
-    h2 {
+    h1 {
+      text-align: center;
       color: #003366;
-      border-bottom: 2px solid #ccc;
-      padding-bottom: 0.3em;
-      margin-top: 2em;
     }
-    label {
-      display: block;
-      margin-top: 1em;
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      padding: 2em;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
     input[type="number"], input[type="text"] {
-      width: 100%;
       padding: 0.5em;
-      margin-top: 0.3em;
-      border: 1px solid #ccc;
-      border-radius: 4px;
+      margin: 0.3em 0;
+      width: 100%;
+      box-sizing: border-box;
     }
     button {
+      padding: 0.7em 1.5em;
       margin-top: 1em;
-      padding: 0.5em 1em;
-      background: #0066cc;
+      background-color: #003366;
       color: white;
       border: none;
       border-radius: 4px;
       cursor: pointer;
     }
-    button:hover {
-      background: #004999;
-    }
     .result {
-      margin-top: 2em;
+      background: #eef;
       padding: 1em;
-      background: #f1f1f1;
+      margin-top: 2em;
       border-left: 4px solid #0066cc;
     }
     .formula {
-      font-size: 1.3em;
-      text-align: center;
-      margin-top: 1em;
-      font-family: 'Cambria Math', 'Times New Roman', serif;
+      background: #f0f0f0;
+      padding: 1em;
+      border-radius: 8px;
+      margin-bottom: 1.5em;
+      font-family: 'Courier New', monospace;
     }
   </style>
 </head>
 <body>
-  <header>
+  <div class="container">
     <h1>MU-CFT: Coherent Quantum Branch Selector</h1>
-    <p>Select the most coherent quantum branch using Mandrov's formula</p>
-  </header>
-  <main>
     <div class="formula">
-      C = P &middot; exp(&minus;&Delta;S) &middot; E
+      <p><strong>Coherence Functional:</strong> C = P · exp(−ΔS) · E</p>
+      <p><strong>Subjective Probability:</strong> P<sub>subjective</sub>(B<sub>i</sub>) = C(B<sub>i</sub>) / ∑<sub>j</sub> C(B<sub>j</sub>)</p>
     </div>
+    <p>Enter each possible branch below:</p>
+    <div id="branchInputs"></div>
+    <button onclick="addBranch()">Add Branch</button>
+    <button onclick="calculate()">Calculate Coherence</button>
 
-    <h2>Enter Branch Data</h2>
-    <form id="branchForm">
-      <label>Branch Name:
-        <input type="text" id="name" required />
-      </label>
-      <label>P (probability):
-        <input type="number" step="any" id="p" required />
-      </label>
-      <label>ΔS (entropy increase):
-        <input type="number" step="any" id="ds" required />
-      </label>
-      <label>E (energy coherence):
-        <input type="number" step="any" id="e" required />
-      </label>
-      <button type="submit">Add Branch</button>
-    </form>
-
-    <button onclick="calculateCoherence()">Select Most Coherent Branch</button>
-
-    <div class="result" id="output"></div>
-  </main>
+    <div class="result" id="results"></div>
+  </div>
 
   <script>
-    const branches = [];
+    let branchIndex = 1;
+    let branches = [];
 
-    document.getElementById('branchForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const name = document.getElementById('name').value.trim();
-      const p = parseFloat(document.getElementById('p').value);
-      const ds = parseFloat(document.getElementById('ds').value);
-      const eVal = parseFloat(document.getElementById('e').value);
+    function addBranch() {
+      const container = document.getElementById("branchInputs");
+      const div = document.createElement("div");
+      div.innerHTML = `
+        <h3>Branch B${branchIndex}</h3>
+        <label>P(B${branchIndex}):</label><input type="number" step="any" id="p${branchIndex}" /><br>
+        <label>ΔS(B${branchIndex}):</label><input type="number" step="any" id="s${branchIndex}" /><br>
+        <label>E(B${branchIndex}):</label><input type="number" step="any" id="e${branchIndex}" /><br>
+      `;
+      container.appendChild(div);
+      branchIndex++;
+    }
 
-      if (name && !isNaN(p) && !isNaN(ds) && !isNaN(eVal)) {
-        const c = p * Math.exp(-ds) * eVal;
-        branches.push({ name, p, ds, e: eVal, c });
-        document.getElementById('branchForm').reset();
-        alert(`Branch "${name}" added.`);
-      }
-    });
-
-    function calculateCoherence() {
-      if (branches.length === 0) {
-        document.getElementById('output').innerText = 'No branches added.';
-        return;
-      }
-
-      let best = branches[0];
-      for (let i = 1; i < branches.length; i++) {
-        if (branches[i].c > best.c) {
-          best = branches[i];
+    function calculate() {
+      branches = [];
+      let totalC = 0;
+      for (let i = 1; i < branchIndex; i++) {
+        const P = parseFloat(document.getElementById(`p${i}`).value);
+        const dS = parseFloat(document.getElementById(`s${i}`).value);
+        const E = parseFloat(document.getElementById(`e${i}`).value);
+        if (!isNaN(P) && !isNaN(dS) && !isNaN(E)) {
+          const C = P * Math.exp(-dS) * E;
+          branches.push({ index: i, P, dS, E, C });
+          totalC += C;
         }
       }
 
-      let result = `<strong>Most Coherent Branch:</strong><br>Name: ${best.name}<br>C = ${best.c.toFixed(5)}<br>P = ${best.p}, ΔS = ${best.ds}, E = ${best.e}`;
+      branches.forEach(b => {
+        b.Psubj = b.C / totalC;
+      });
 
-      result += '<hr><strong>All Branches:</strong><br>';
-      for (const b of branches) {
-        result += `Name: ${b.name}, C = ${b.c.toFixed(5)}<br>`;
-      }
+      const best = branches.reduce((a, b) => (a.C > b.C ? a : b), branches[0]);
 
-      document.getElementById('output').innerHTML = result;
+      let output = `<h3>Most Coherent Branch: B${best.index}</h3>`;
+      output += `<p>C = ${best.C.toFixed(5)} | P<sub>subjective</sub> = ${best.Psubj.toFixed(5)}</p>`;
+
+      output += `<h4>All Branches:</h4><ul>`;
+      branches.forEach(b => {
+        output += `<li>B${b.index}: C = ${b.C.toFixed(5)}, P<sub>subjective</sub> = ${b.Psubj.toFixed(5)}</li>`;
+      });
+      output += `</ul>`;
+
+      document.getElementById("results").innerHTML = output;
     }
   </script>
 </body>

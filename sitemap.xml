@@ -1,9 +1,123 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
   <url>
     <loc>https://dmitrymandrov.github.io/mandrov-unified-coherent-field-theory/</loc>
     <lastmod>2025-08-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
+
+  <url>
+    <loc>https://dmitrymandrov.github.io/mandrov-unified-coherent-field-theory/pdfs/Mandrov%20Coherent%20Field%20Theory%20(MCFT).pdf</loc>
+    <lastmod>2025-08-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://dmitrymandrov.github.io/mandrov-unified-coherent-field-theory/pdfs/Mandrov%20Coherent%20Gravity.pdf</loc>
+    <lastmod>2025-08-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://dmitrymandrov.github.io/mandrov-unified-coherent-field-theory/pdfs/Mandrov%20Unified%20Coherent%20Field%20Theory.pdf</loc>
+    <lastmod>2025-08-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://dmitrymandrov.github.io/mandrov-unified-coherent-field-theory/pdfs/MU-CFT%20II.pdf</loc>
+    <lastmod>2025-08-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://dmitrymandrov.github.io/mandrov-unified-coherent-field-theory/pdfs/MU-CFT%20III.pdf</loc>
+    <lastmod>2025-08-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://dmitrymandrov.github.io/mandrov-unified-coherent-field-theory/pdfs/MU-CFT%20IV.pdf</loc>
+    <lastmod>2025-08-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://dmitrymandrov.github.io/mandrov-unified-coherent-field-theory/pdfs/MU-CFT%20V.pdf</loc>
+    <lastmod>2025-08-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://dmitrymandrov.github.io/mandrov-unified-coherent-field-theory/pdfs/MU-CFT%20VI.pdf</loc>
+    <lastmod>2025-08-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://dmitrymandrov.github.io/mandrov-unified-coherent-field-theory/pdfs/MU-CFT%20VII.pdf</loc>
+    <lastmod>2025-08-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://dmitrymandrov.github.io/mandrov-unified-coherent-field-theory/pdfs/MU-CFT%20VIII.pdf</loc>
+    <lastmod>2025-08-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://dmitrymandrov.github.io/mandrov-unified-coherent-field-theory/pdfs/Formalizing%20Objectivity.pdf</loc>
+    <lastmod>2025-08-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://dmitrymandrov.github.io/mandrov-unified-coherent-field-theory/pdfs/Observer-Driven%20Coherence%20as%20a%20Foundation%20of%20Physical%20Realization.pdf</loc>
+    <lastmod>2025-08-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://dmitrymandrov.github.io/mandrov-unified-coherent-field-theory/pdfs/Temporal%20Evolution%20of%20Coherent%20Realization.pdf</loc>
+    <lastmod>2025-08-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://dmitrymandrov.github.io/mandrov-unified-coherent-field-theory/pdfs/Comparison%20of%20MU-CFT%20and%20General%20Relativity.pdf</loc>
+    <lastmod>2025-08-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://dmitrymandrov.github.io/mandrov-unified-coherent-field-theory/imgs/Lagrangian%20Structure%20and%20Coherence%20Dynamics.png</loc>
+    <lastmod>2025-08-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://dmitrymandrov.github.io/mandrov-unified-coherent-field-theory/coherence-app.html</loc>
+    <lastmod>2025-08-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
 </urlset>

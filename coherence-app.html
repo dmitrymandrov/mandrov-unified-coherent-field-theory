@@ -1,6 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+   <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$','$$'], ['\\[','\\]']]
+      },
+      options: {
+        renderActions: {
+          addMenu: []
+        }
+      }
+    };
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MU-CFT: Coherent Quantum Branch Selector</title>
@@ -61,13 +76,13 @@
   <div class="container">
     <h1>MU-CFT: Coherent Quantum Branch Selector</h1>
     <div class="formula">
-      <p><strong>Coherence Functional:</strong> C(B<sub>i</sub>) = P(B<sub>i</sub>) · exp(−ΔS(B<sub>i</sub>)) · E(B<sub>i</sub>)</p>
-      <p><strong>Subjective Probability:</strong> P<sub>subjective</sub>(B<sub>i</sub>) = C(B<sub>i</sub>) / ∑<sub>j</sub> C(B<sub>j</sub>)</p>
+      <p><strong>Coherence Functional:</strong> $C(B<sub>i</sub>) = P(B<sub>i</sub>) · e^{(-\Delta S(B<sub>i</sub>))} · E(B<sub>i</sub>)$</p>
+      <p><strong>Subjective Probability:</strong> $P<sub>subjective</sub>(B<sub>i</sub>) = C(B<sub>i</sub>) / ∑<sub>j</sub> C(B<sub>j</sub>)$</p>
     </div>
 
-    <p>P(Bi): probability of the branch (between 0 and 1)</p>
-    <p>ΔS(Bi): entropy increase for the branch</p>
-    <p>E(Bi): energy coherence or stability (higher is better)</p>
+    <p>$P(Bi)$: probability of the branch (between 0 and 1)</p>
+    <p>$ΔS(Bi)$: entropy increase for the branch</p>
+    <p>$E(Bi)$: energy coherence or stability (higher is better)</p>
     
     <p><strong>Enter each possible branch below:</strong></p>
     <div id="branchInputs"></div>
